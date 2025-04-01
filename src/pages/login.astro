@@ -69,6 +69,14 @@ import AuthLayout from "@/layouts/AuthLayout.astro";
             class="disabled:bg-gray-300 w-full flex justify-center bg-red-400 text-gray-100 p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500"
           >
             Ingresar con Google
+            <span class="ml-2">
+              <img
+                src="/logos/google.svg"
+                alt="Google"
+                height="20"
+                width="20"
+              />
+            </span>
           </button>
         </div>
       </form>
@@ -89,7 +97,6 @@ import AuthLayout from "@/layouts/AuthLayout.astro";
 </AuthLayout>
 
 <script>
-  import { actions } from "astro:actions";
   import Swal from "sweetalert2";
 
   const form = document.querySelector("form") as HTMLFormElement;
@@ -104,7 +111,10 @@ import AuthLayout from "@/layouts/AuthLayout.astro";
 
     const formData = new FormData(form);
 
-    const resp = await signIn();
+    const resp = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    } as any);
 
     console.log({ resp });
 
