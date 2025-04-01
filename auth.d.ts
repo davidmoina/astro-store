@@ -1,11 +1,9 @@
-import type { User as DefaultUser, DefaultSession } from "@auth/core/types";
+import type { DefaultSession } from "@auth/core/types";
 
 declare module "@auth/core/types" {
-  interface User extends DefaultUser {
-    role?: string;
-  }
-
-  interface Session extends DefaultSession {
-    user: User;
+  interface Session {
+    user: {
+      role?: string;
+    } & DefaultSession["user"];
   }
 }
