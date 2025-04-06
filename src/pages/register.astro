@@ -94,6 +94,8 @@ import AuthLayout from "@/layouts/AuthLayout.astro";
   const form = document.querySelector("form") as HTMLFormElement;
   const btnSubmit = document.querySelector("#btn-submit") as HTMLButtonElement;
 
+  const { signIn } = await import("auth-astro/client");
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     btnSubmit.setAttribute("disabled", "disabled");
@@ -112,6 +114,11 @@ import AuthLayout from "@/layouts/AuthLayout.astro";
       return;
     }
 
-    window.location.replace("/protected");
+    await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    } as any);
+
+    window.location.replace("/");
   });
 </script>

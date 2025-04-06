@@ -1,6 +1,6 @@
 import { db, Role, User } from "astro:db";
 import { v4 as uuid } from "uuid";
-import { hash, hashSync } from "bcrypt-ts";
+import { hashSync } from "bcrypt-ts";
 
 // https://astro.build/db/seed
 export default async function seed() {

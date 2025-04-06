@@ -2,7 +2,7 @@ import type { AdapterUser } from "@auth/core/adapters";
 import Credentials from "@auth/core/providers/credentials";
 import { db, eq, User } from "astro:db";
 import { defineConfig } from "auth-astro";
-import { compare, compareSync } from "bcrypt-ts";
+import { compareSync } from "bcrypt-ts";
 
 export default defineConfig({
   providers: [
