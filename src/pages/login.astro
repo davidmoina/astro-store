@@ -97,15 +97,16 @@ import AuthLayout from "@/layouts/AuthLayout.astro";
 </AuthLayout>
 
 <script>
+  import { $ } from "@/lib/dom-selector";
   import Swal from "sweetalert2";
 
-  const form = document.querySelector("form") as HTMLFormElement;
-  const btnSubmit = document.querySelector("#btn-submit") as HTMLButtonElement;
-  const bntGoogle = document.querySelector("#btn-google") as HTMLButtonElement;
+  const form = $<HTMLFormElement>("form");
+  const btnSubmit = $<HTMLButtonElement>("#btn-submit")!;
+  const bntGoogle = $<HTMLButtonElement>("#btn-google")!;
 
   const { signIn } = await import("auth-astro/client");
 
-  form.addEventListener("submit", async (e) => {
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
     btnSubmit.setAttribute("disabled", "disabled");
 
