@@ -2,10 +2,30 @@ import { defineAction } from "astro:actions";
 import { db, eq, Product, ProductImage } from "astro:db";
 import { z } from "astro:schema";
 
+const newProduct = {
+  id: "",
+  title: "",
+  slug: "",
+  description: "",
+  price: 0,
+  stock: 0,
+  sizes: "",
+  tags: "",
+  type: "",
+  gender: "",
+};
+
 export const getProductBySlug = defineAction({
   accept: "json",
   input: z.string(),
   handler: async (slug) => {
+    if (slug === "new") {
+      return {
+        product: newProduct,
+        images: [],
+      };
+    }
+
     const [product] = await db
       .select()
       .from(Product)
@@ -22,7 +42,7 @@ export const getProductBySlug = defineAction({
 
     return {
       product,
-      images: images.map((image) => image.image),
+      images,
     };
   },
 });
