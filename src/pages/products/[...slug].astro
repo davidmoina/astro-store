@@ -12,12 +12,16 @@ if (error) {
 }
 
 const { product, images } = data;
+
+const seoImage = images[0].image.startsWith("http")
+  ? images[0].image
+  : `${Astro.url.origin}/images/products/${images[0].image}`;
 ---
 
 <MainLayout
   title={product.title}
   description={product.description}
-  image={images[0].image}
+  image={seoImage}
 >
   <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-4">
     <ProductSlideshow images={images.map((image) => image.image)} />
